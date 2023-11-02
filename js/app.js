@@ -63,7 +63,9 @@ function takePhoto() {
 
 function getPic(){
   window.sessionStorage
-  localStorage.getItem("MyPicture")
+  var theImageTag = document.getElementById("imageTag");
+  theImageTag.src = localStorage.getItem("MyPicture");
+
 }
 
 
