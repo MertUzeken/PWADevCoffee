@@ -55,11 +55,14 @@ function takePhoto() {
     .then(blob => {
       var theImageTag = document.getElementById("imageTag");
       theImageTag.src = URL.createObjectURL(blob);
-      storage.setItem(storage.setItem(0, theImageCapturer))// Save the image to the Cache API
+      storage.setItem(0, theImageCapturer)// Save the image to the Cache API
     })
     .catch(err => alert('Error: ' + err));
 }
 
+function getPic(){
+  storage.getItem(0)
+}
 
 
 if ("serviceWorker" in navigator) {
