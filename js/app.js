@@ -17,6 +17,11 @@ function getUserMedia(constraints) {
   }
 }
 
+function saveStream(type){
+  stream.getVideoTracks()
+  
+}
+
 function getStream (type) {
   if (!navigator.mediaDevices && !navigator.getUserMedia && !navigator.webkitGetUserMedia &&
     !navigator.mozGetUserMedia && !navigator.msGetUserMedia) {
