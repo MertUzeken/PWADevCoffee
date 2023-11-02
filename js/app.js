@@ -29,6 +29,7 @@ function takePhoto() {
   }
   
   var theImageCapturer = new ImageCapture(theStream.getVideoTracks()[0]);
+}
 
   theImageCapturer.takePhoto()
     .then(blob => {
