@@ -55,6 +55,7 @@ function takePhoto() {
     .then(blob => {
       var theImageTag = document.getElementById("imageTag");
       theImageTag.src = URL.createObjectURL(blob);
+      saveToCache(theImageTag.src); // Save the image to the Cache API
     })
     .catch(err => alert('Error: ' + err));
 }
