@@ -1,20 +1,40 @@
 const container = document.querySelector(".container");
-function getUserMedia(constraints) {
-  // if Promise-based API is available, use it
-  if (navigator.mediaDevices) {
-    return navigator.mediaDevices.getUserMedia(constraints);
-  }
-    
-  // otherwise try falling back to old, possibly prefixed API...
-  var legacyApi = navigator.getUserMedia || navigator.webkitGetUserMedia ||
+
+
+function getUserMedia(options, successCallback, failureCallback) {
+  var api = navigator.getUserMedia || navigator.webkitGetUserMedia ||
     navigator.mozGetUserMedia || navigator.msGetUserMedia;
-    
-  if (legacyApi) {
-    // ...and promisify it
-    return new Promise(function (resolve, reject) {
-      legacyApi.bind(navigator)(constraints, resolve, reject);
-    });
+  if (api) {
+    return api.bind(navigator)(options, successCallback, failureCallback);
   }
+}
+
+var theStream;
+
+function getStream() {
+  if (!navigator.getUserMedia && !navigator.webkitGetUserMedia &&
+    !navigator.mozGetUserMedia && !navigator.msGetUserMedia) {
+    alert('User Media API not supported.');
+    return;
+  }
+  
+  var constraints = {
+    video: true
+  };
+
+  getUserMedia(constraints, function (stream) {
+    var mediaControl = document.querySelector('video');
+    if ('srcObject' in mediaControl) {
+      mediaControl.srcObject = stream;
+    } else if (navigator.mozGetUserMedia) {
+      mediaControl.mozSrcObject = stream;
+    } else {
+      mediaControl.src = (window.URL || window.webkitURL).createObjectURL(stream);
+    }
+    theStream = stream;
+  }, function (err) {
+    alert('Error: ' + err);
+  });
 }
 
 function takePhoto() {
@@ -29,7 +49,6 @@ function takePhoto() {
   }
   
   var theImageCapturer = new ImageCapture(theStream.getVideoTracks()[0]);
-}
 
   theImageCapturer.takePhoto()
     .then(blob => {
@@ -37,12 +56,20 @@ function takePhoto() {
       theImageTag.src = URL.createObjectURL(blob);
     })
     .catch(err => alert('Error: ' + err));
+
+
+
+
+
 function getStream (type) {
   if (!navigator.mediaDevices && !navigator.getUserMedia && !navigator.webkitGetUserMedia &&
     !navigator.mozGetUserMedia && !navigator.msGetUserMedia) {
     alert('User Media API not supported.');
     return;
   }
+
+
+
 
   var constraints = {};
   constraints[type] = true;
