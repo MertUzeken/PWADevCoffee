@@ -12,15 +12,12 @@ function getUserMedia(options, successCallback, failureCallback) {
 var theStream;
 
 function getStream() {
-  if (!navigator.getUserMedia && !navigator.webkitGetUserMedia &&
-    !navigator.mozGetUserMedia && !navigator.msGetUserMedia) {
+  if (!navigator.getUserMedia && !navigator.webkitGetUserMedia && !navigator.mozGetUserMedia && !navigator.msGetUserMedia) {
     alert('User Media API not supported.');
     return;
   }
   
-  var constraints = {
-    video: true
-  };
+  var constraints = {video: true};
 
   getUserMedia(constraints, function (stream) {
     var mediaControl = document.querySelector('video');
@@ -56,7 +53,7 @@ function takePhoto() {
       theImageTag.src = URL.createObjectURL(blob);
     })
     .catch(err => alert('Error: ' + err));
-
+}
 
 
 
