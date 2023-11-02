@@ -1,6 +1,7 @@
 const container = document.querySelector(".container");
 
 
+
 function getUserMedia(options, successCallback, failureCallback) {
   var api = navigator.getUserMedia || navigator.webkitGetUserMedia ||
     navigator.mozGetUserMedia || navigator.msGetUserMedia;
@@ -12,12 +13,15 @@ function getUserMedia(options, successCallback, failureCallback) {
 var theStream;
 
 function getStream() {
-  if (!navigator.getUserMedia && !navigator.webkitGetUserMedia && !navigator.mozGetUserMedia && !navigator.msGetUserMedia) {
+  if (!navigator.getUserMedia && !navigator.webkitGetUserMedia &&
+    !navigator.mozGetUserMedia && !navigator.msGetUserMedia) {
     alert('User Media API not supported.');
     return;
   }
   
-  var constraints = {video: true};
+  var constraints = {
+    video: true
+  };
 
   getUserMedia(constraints, function (stream) {
     var mediaControl = document.querySelector('video');
@@ -53,41 +57,6 @@ function takePhoto() {
       theImageTag.src = URL.createObjectURL(blob);
     })
     .catch(err => alert('Error: ' + err));
-}
-
-
-
-
-function getStream (type) {
-  if (!navigator.mediaDevices && !navigator.getUserMedia && !navigator.webkitGetUserMedia &&
-    !navigator.mozGetUserMedia && !navigator.msGetUserMedia) {
-    alert('User Media API not supported.');
-    return;
-  }
-
-
-
-
-  var constraints = {};
-  constraints[type] = true;
-  
-  getUserMedia(constraints)
-    .then(function (stream) {
-      var mediaControl = document.querySelector(type);
-      
-      if ('srcObject' in mediaControl) {
-        mediaControl.srcObject = stream;
-      } else if (navigator.mozGetUserMedia) {
-        mediaControl.mozSrcObject = stream;
-      } else {
-        mediaControl.src = (window.URL || window.webkitURL).createObjectURL(stream);
-      }
-      
-      mediaControl.play();
-    })
-    .catch(function (err) {
-      alert('Error: ' + err);
-    });
 }
 
 
