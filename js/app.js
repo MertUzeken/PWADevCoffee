@@ -56,7 +56,7 @@ function takePhoto() {
       var theImageTag = document.getElementById("imageTag");
       theImageTag.src = URL.createObjectURL(blob);
       window.sessionStorage
-      localStorage.setItem("MyPicture", blob)// Save the image to the Cache API
+      localStorage.setItem("MyPicture", theImageTag.src)// Save the image to the Cache API
     })
     .catch(err => alert('Error: ' + err));
 }
