@@ -1,132 +1,29 @@
 const container = document.querySelector(".container");
-const coffees = [
-  {
-    name: "Perspiciatis",
-    image: "images/coffee1.jpg"
-  },
-  {
-    name: "Voluptatem",
-    image: "images/coffee2.jpg"
-  },
-  {
-    name: "Explicabo",
-    image: "images/coffee3.jpg"
-  },
-  {
-    name: "Rchitecto",
-    image: "images/coffee4.jpg"
-  },
-  {
-    name: " Beatae",
-    image: "images/coffee5.jpg"
-  },
-  {
-    name: " Vitae",
-    image: "images/coffee6.jpg"
-  },
-  {
-    name: "Inventore",
-    image: "images/coffee7.jpg"
-  },
-  {
-    name: "Veritatis",
-    image: "images/coffee8.jpg"
-  },
-  {
-    name: "Accusantium",
-    image: "images/coffee9.jpg"
-  }
-];
 
-var target = document.getElementById('target');
-var watchId;
 
-function appendLocation(location, verb) {
-  verb = verb || 'updated';
-  var newLocation = document.createElement('p');
-  newLocation.innerHTML = 'Location ' + verb + ': ' + location.coords.latitude + ', ' + location.coords.longitude + '';
-  target.appendChild(newLocation);
-}
-
-if ('geolocation' in navigator) {
-  document.getElementById('askButton').addEventListener('click', function () {
-    navigator.geolocation.getCurrentPosition(function (location) {
-      appendLocation(location, 'fetched');
+if ('storage' in navigator && 'estimate' in navigator.storage) {
+  navigator.storage.estimate()
+    .then(estimate => {
+      document.getElementById('usage').innerHTML = estimate.usage;
+      document.getElementById('quota').innerHTML = estimate.quota;
+      document.getElementById('percent').innerHTML = (estimate.usage * 100 / estimate.quota).toFixed(0);
     });
-    watchId = navigator.geolocation.watchPosition(appendLocation);
-  });
-} else {
-  target.innerText = 'Geolocation API not supported.';
 }
 
-// __________________ END GEO LOCATION _____________________________
-// __________________ START DEVICE POS _____________________________
+if ('storage' in navigator && 'persisted' in navigator.storage) {
+  navigator.storage.persisted()
+    .then(persisted => {
+      document.getElementById('persisted').innerHTML = persisted ? 'persisted' : 'not persisted';
+    });
+}
 
-
-
-if ('LinearAccelerationSensor' in window && 'Gyroscope' in window) {
-  document.getElementById('moApi').innerHTML = 'Generic Sensor API';
-  
-  let lastReadingTimestamp;
-  let accelerometer = new LinearAccelerationSensor();
-  accelerometer.addEventListener('reading', e => {
-    if (lastReadingTimestamp) {
-      intervalHandler(Math.round(accelerometer.timestamp - lastReadingTimestamp));
-    }
-    lastReadingTimestamp = accelerometer.timestamp
-    accelerationHandler(accelerometer, 'moAccel');
-  });
-  accelerometer.start();
-  
-  if ('GravitySensor' in window) {
-    let gravity = new GravitySensor();
-    gravity.addEventListener('reading', e => accelerationHandler(gravity, 'moAccelGrav'));
-    gravity.start();
+function requestPersistence() {
+  if ('storage' in navigator && 'persist' in navigator.storage) {
+    navigator.storage.persist()
+      .then(persisted => {
+        document.getElementById('persisted').innerHTML = persisted ? 'persisted' : 'not persisted';
+      });
   }
-  
-  let gyroscope = new Gyroscope();
-  gyroscope.addEventListener('reading', e => rotationHandler({
-    alpha: gyroscope.x,
-    beta: gyroscope.y,
-    gamma: gyroscope.z
-  }));
-  gyroscope.start();
-  
-} else if ('DeviceMotionEvent' in window) {
-  document.getElementById('moApi').innerHTML = 'Device Motion API';
-  
-  var onDeviceMotion = function (eventData) {
-    accelerationHandler(eventData.acceleration, 'moAccel');
-    accelerationHandler(eventData.accelerationIncludingGravity, 'moAccelGrav');
-    rotationHandler(eventData.rotationRate);
-    intervalHandler(eventData.interval);
-  }
-  
-  window.addEventListener('devicemotion', onDeviceMotion, false);
-} else {
-  document.getElementById('moApi').innerHTML = 'No Accelerometer & Gyroscope API available';
-}
-
-function accelerationHandler(acceleration, targetId) {
-  var info, xyz = "[X, Y, Z]";
-
-  info = xyz.replace("X", acceleration.x && acceleration.x.toFixed(3));
-  info = info.replace("Y", acceleration.y && acceleration.y.toFixed(3));
-  info = info.replace("Z", acceleration.z && acceleration.z.toFixed(3));
-  document.getElementById(targetId).innerHTML = info;
-}
-
-function rotationHandler(rotation) {
-  var info, xyz = "[X, Y, Z]";
-
-  info = xyz.replace("X", rotation.alpha && rotation.alpha.toFixed(3));
-  info = info.replace("Y", rotation.beta && rotation.beta.toFixed(3));
-  info = info.replace("Z", rotation.gamma && rotation.gamma.toFixed(3));
-  document.getElementById("moRotation").innerHTML = info;
-}
-
-function intervalHandler(interval) {
-  document.getElementById("moInterval").innerHTML = interval;
 }
 
 
