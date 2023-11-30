@@ -17,8 +17,26 @@ function submitForm(event) {
 
   console.table(transaction);
 
+  displayTransactions();
+  updateBalance();
   clearForm();
 
+}
+
+function displayTransactions(){
+  const transactionObj = document.getElementById('transactionList')
+  transactionList.innerHTML = '';
+
+  transactionObj.forEach(element => {
+    const listItem = document.createElement('li');
+    listItem.textContent = `${element.description} - ${element.date} - ${element.category} - ${element.amount.toFixed(2)}`;
+    transactionList.appendChild(listItem);
+  });
+}
+
+function updateBalance() {
+  totalBalance = transactions.reduce((sum, transaction) => sum + transaction.amount, 0);
+  document.getElementById('balance').value = totalBalance.toFixed(2);
 }
 
 function clearForm() {
