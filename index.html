@@ -20,47 +20,6 @@
     <title>Dev'Coffee PWA</title>
   </head>
   <body>
-  </div>
-  <main>
-      <h1>Willkommen</h1>
-    <div class="container"></div>
-
-    <h2>Transaction Details</h2>
-
-    <form>
-      <label for="description">Beschreibung:</label>
-      <input type="text" id="description" name="description" required><br>
-  
-      <label for="date">Datum:</label>
-      <input type="date" id="date" name="date" required><br>
-  
-      <label for="category">Kategorie:</label>
-      <input type="text" id="category" name="category" required><br>
-  
-      <label for="amount">Wert der Transaktion:</label>
-      <input type="number" id="amount" name="amount" step="0.01" required><br>
-  
-      <input type="submit" value="Submit"> 
-    </form>
-
-    <tbody id="tableSection"></tbody>
-
-    function submitForm(){
-
-Um die eingegebenen Daten zu speichern und in einer Übersicht anzuzeigen, benötigst du in der Regel eine Server-seitige Sprache (wie PHP, Node.js, Python mit Flask/Django, etc.) und eine Datenbank (z.B., MySQL, MongoDB). Diese ermöglichen das Speichern und Abrufen von Daten.
-
-Da ich jedoch nur HTML bereitstellen kann und keine Serverseitige Logik, werde ich dir ein einfaches Beispiel mit JavaScript für den Client-Seitigen Gebrauch geben. Beachte jedoch, dass dies nicht sicher ist und nur für Lernzwecke verwendet werden sollte.
-
-html
-Copy code
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Transaction Overview</title>
-</head>
-<body>
 
   <h2>Transaction Overview</h2>
 
@@ -85,12 +44,6 @@ Copy code
 
   <h3>Transaction History</h3>
   <ul id="transactionList"></ul>
-
-
-
-
-    </main>
-
 
 
     <script src="js/app.js"></script>
