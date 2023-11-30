@@ -33,7 +33,7 @@ function setTransactiondata(){
 
 function getTransactiondata(){
   window.sessionStorage
-  transactions = localStorage.getItem("TransactionData");
+  console.table(localStorage.getItem("TransactionData"));
   displayTransactions();
 }
 
