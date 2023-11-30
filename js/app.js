@@ -25,15 +25,20 @@ function submitForm(event) {
 
 }
 
-function displayTransactions(){
-  const transactionObj = document.getElementById('transactionList')
-  transactionObj.innerHTML = '';
+function displayTransactions() {
+  const transactionTableBody = document.getElementById('transactionList');
+  const newRow = transactionTableBody.insertRow();
 
-  //Call Array, append all elements as li HTML
-  transactions.forEach(element => {
-    const listItem = document.createElement('li');
-    listItem.textContent = `${element.description} - ${element.date} - ${element.category} - ${element.amount.toFixed(2)}`;
-    transactionObj.appendChild(listItem);
+  transactions.forEach(transaction => {
+    const cellDescription = newRow.insertCell();
+    const cellDate = newRow.insertCell();
+    const cellCategory = newRow.insertCell();
+    const cellAmount = newRow.insertCell();
+
+    cellDescription.textContent = transaction.description;
+    cellDate.textContent = transaction.date;
+    cellCategory.textContent = transaction.category;
+    cellAmount.textContent = transaction.amount.toFixed(2);
   });
 }
 

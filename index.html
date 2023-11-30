@@ -43,7 +43,17 @@
   <div><p></p></div>
 
   <h3>Transaction History</h3>
-  <ul id="transactionList"></ul>
+  <table id="transactionTable">
+    <thead>
+      <tr>
+        <th>Beschreibung</th>
+        <th>Datum</th>
+        <th>Kategorie</th>
+        <th>Wert der Transaktion</th>
+      </tr>
+    </thead>
+    <tbody id="transactionList"></tbody>
+  </table>
 
 
   <label for="balance">Gesamtsumme (Balance):</label>
@@ -56,5 +66,11 @@
 
 
 <style>
-
+      li {
+        background-color: #fff;
+        padding: 10px;
+        margin-bottom: 5px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+      }
 </style>
