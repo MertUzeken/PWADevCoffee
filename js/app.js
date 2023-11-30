@@ -28,12 +28,12 @@ function submitForm(event) {
 
 function setTransactiondata(){
   window.sessionStorage
-  localStorage.setItem("TransactionData", transactions);
+  localStorage.setItem("TransactionData", JSON.stringify(transactions));
 }
 
 function getTransactiondata(){
-  window.sessionStorage
-  console.table(localStorage.getItem("TransactionData"));
+  const storedTransactions = localStorage.getItem("TransactionData");
+  transactions = storedTransactions ? JSON.parse(storedTransactions) : [];
   displayTransactions();
 }
 
