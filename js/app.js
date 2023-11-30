@@ -38,7 +38,6 @@ function getTransactiondata(){
 }
 
 function displayTransactions() {
-  const transactionTableBody = "";
   const transactionTableBody = document.getElementById('transactionList');
   const newRow = transactionTableBody.insertRow();
 
