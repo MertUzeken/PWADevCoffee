@@ -23,6 +23,18 @@ function submitForm(event) {
   updateBalance();
   clearForm();
 
+
+}
+
+function setTransactiondata(){
+  window.sessionStorage
+  localStorage.setItem("TransactionData", transactions);
+}
+
+function getTransactiondata(){
+  window.sessionStorage
+  transactions = localStorage.getItem("TransactionData");
+
 }
 
 function displayTransactions() {
