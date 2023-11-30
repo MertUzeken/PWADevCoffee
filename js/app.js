@@ -26,6 +26,7 @@ function submitForm(event) {
 }
 
 function displayTransactions() {
+  const transactionTableBody = "";
   const transactionTableBody = document.getElementById('transactionList');
   const newRow = transactionTableBody.insertRow();
 
