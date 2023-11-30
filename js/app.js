@@ -47,8 +47,8 @@ if ('getBattery' in navigator || ('battery' in navigator && 'Promise' in window)
   
   batteryPromise.then(function (battery) {
     document.getElementById('charging').innerHTML = battery.charging ? 'charging' : 'discharging';
-    document.getElementById('chargingTime').innerHTML = battery.chargingTime + ' s';
-    document.getElementById('dischargingTime').innerHTML = battery.dischargingTime + ' s';
+    document.getElementById('chargingTime').innerHTML = convertSecondsToMinutes(battery.chargingTime) + 'min';
+    document.getElementById('dischargingTime').innerHTML = convertSecondsToMinutes(battery.dischargingTime) + 'min';
     document.getElementById('level').innerHTML = battery.level;
     
     battery.addEventListener('chargingchange', onChargingChange);
@@ -56,6 +56,9 @@ if ('getBattery' in navigator || ('battery' in navigator && 'Promise' in window)
     battery.addEventListener('dischargingtimechange', onDischargingTimeChange);
     battery.addEventListener('levelchange', onLevelChange);
   });
+  function convertSecondsToMinutes(seconds) {
+    return Math.floor(seconds / 60);
+}
 }
 
 
