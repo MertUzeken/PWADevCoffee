@@ -30,6 +30,7 @@ function displayTransactions() {
   const newRow = transactionTableBody.insertRow();
 
   transactions.forEach(transaction => {
+    const newRow = transactionTableBody.insertRow();
     const cellDescription = newRow.insertCell();
     const cellDate = newRow.insertCell();
     const cellCategory = newRow.insertCell();
@@ -43,6 +44,7 @@ function displayTransactions() {
 }
 
 function updateBalance() {
+  totalBalance = 0;
   totalBalance = transactions.reduce((sum, transaction) => sum + transaction.amount, 0);
   document.getElementById('balance').value = totalBalance.toFixed(2);
 }
