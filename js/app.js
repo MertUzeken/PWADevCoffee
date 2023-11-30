@@ -29,7 +29,8 @@ function displayTransactions(){
   const transactionObj = document.getElementById('transactionList')
   transactionList.innerHTML = '';
 
-  transactionObj.forEach(element => {
+  //Call Array, append all elements as li HTML
+  transactions.forEach(element => {
     const listItem = document.createElement('li');
     listItem.textContent = `${element.description} - ${element.date} - ${element.category} - ${element.amount.toFixed(2)}`;
     transactionList.appendChild(listItem);
