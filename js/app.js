@@ -39,6 +39,7 @@ function getTransactiondata(){
 
 function displayTransactions() {
   const transactionTableBody = document.getElementById('transactionList');
+  transactionTableBody.innerHTML = ''; // Clear the existing rows
   const newRow = transactionTableBody.insertRow();
 
   transactions.forEach(transaction => {
