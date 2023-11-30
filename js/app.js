@@ -27,13 +27,13 @@ function submitForm(event) {
 
 function displayTransactions(){
   const transactionObj = document.getElementById('transactionList')
-  transactionList.innerHTML = '';
+  transactionObj.innerHTML = '';
 
   //Call Array, append all elements as li HTML
   transactions.forEach(element => {
     const listItem = document.createElement('li');
     listItem.textContent = `${element.description} - ${element.date} - ${element.category} - ${element.amount.toFixed(2)}`;
-    transactionList.appendChild(listItem);
+    transactionObj.appendChild(listItem);
   });
 }
 
