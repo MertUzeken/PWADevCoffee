@@ -7,6 +7,7 @@ let totalBalance = 0;
 
 function submitForm(event) {
   
+  event.preventDefault();
   const description = document.getElementById('description').value;
   const date = document.getElementById('date').value;
   const category = document.getElementById('category').value;
@@ -15,6 +16,7 @@ function submitForm(event) {
   const transaction = { description, date, category, amount };
   transactions.push(transaction);
 
+  console.log("SubmitForm wurde ausgelöst")
   console.table(transaction);
 
   displayTransactions();
