@@ -1,9 +1,32 @@
 const container = document.querySelector(".container");
 
+
+
 let transactions = [];
 let totalBalance = 0;
 
+function submitForm(event) {
+  
+  const description = document.getElementById('description').value;
+  const date = document.getElementById('date').value;
+  const category = document.getElementById('category').value;
+  const amount = parseFloat(document.getElementById('amount').value);
 
+  const transaction = { description, date, category, amount };
+  transactions.push(transaction);
+
+  console.table(transaction);
+
+  clearForm();
+
+}
+
+function clearForm() {
+  document.getElementById('description').value = '';
+  document.getElementById('date').value = '';
+  document.getElementById('category').value = '';
+  document.getElementById('amount').value = '';
+}
 
 
 if ("serviceWorker" in navigator) {
