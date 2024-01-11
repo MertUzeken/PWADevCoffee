@@ -57,10 +57,6 @@ function startDrag(e) {
 }
 
 
-
-
-  }
-
   [].forEach.call(elements, function (element) {
     element.ontouchstart = element.onmspointerdown = startDrag;
     });
