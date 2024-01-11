@@ -51,9 +51,6 @@ function startDrag(e) {
     var deltaX = currentPos[0] - origin[0];
     var deltaY = currentPos[1] - origin[1];
 
-    // Adjust for horizontal scrolling
-    var scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
-    var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
    
     that.style.left = (pos[0] + deltaX) + 'px';
     that.style.top = (pos[1] + deltaY) + 'px';
