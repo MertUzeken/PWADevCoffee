@@ -2,71 +2,49 @@ const container = document.querySelector(".container");
 
 
 
-let transactions = [];
-let totalBalance = 0;
+function startDrag(e) {
+this.ontouchmove = this.onmspointermove = moveDrag;
 
-function submitForm(event) {
-  
-  event.preventDefault();
-  const description = document.getElementById('description').value;
-  const date = document.getElementById('date').value;
-  const category = document.getElementById('category').value;
-  const amount = parseFloat(document.getElementById('amount').value);
-
-  const transaction = { description, date, category, amount };
-  transactions.push(transaction);
-
-  console.log("SubmitForm wurde ausgelöst")
-  console.table(transaction);
-
-  displayTransactions();
-  updateBalance();
-  clearForm();
-
-
+this.ontouchend = this.onmspointerup = function () {
+  this.ontouchmove = this.onmspointermove = null;
+      this.ontouchend = this.onmspointerup = null;
 }
 
-function setTransactiondata(){
-  window.sessionStorage
-  localStorage.setItem("TransactionData", JSON.stringify(transactions));
+var pos = [this.offsetLeft, this.offsetTop];
+var that = this;
+var origin = getCoors(e);
+
+function moveDrag(e) {
+  var currentPos = getCoors(e);
+  var deltaX = currentPos[0] - origin[0];
+  var deltaY = currentPos[1] - origin[1];
+  this.style.left = (pos[0] + deltaX) + 'px';
+  this.style.top = (pos[1] + deltaY) + 'px';
+  return false; // cancels scrolling
 }
 
-function getTransactiondata(){
-  const storedTransactions = localStorage.getItem("TransactionData");
-  transactions = storedTransactions ? JSON.parse(storedTransactions) : [];
-  displayTransactions();
+function getCoors(e) {
+  var coors = [];
+  if (e.targetTouches && e.targetTouches.length) {
+  var thisTouch = e.targetTouches[0];
+  coors[0] = thisTouch.clientX;
+  coors[1] = thisTouch.clientY;
+  } else {
+      coors[0] = e.clientX;
+      coors[1] = e.clientY;
+  }
+  return coors;
 }
 
-function displayTransactions() {
-  const transactionTableBody = document.getElementById('transactionList');
-  transactionTableBody.innerHTML = ''; // Clear the existing rows
-  const newRow = transactionTableBody.insertRow();
+  }
 
-  transactions.forEach(transaction => {
-    const newRow = transactionTableBody.insertRow();
-    const cellDescription = newRow.insertCell();
-    const cellDate = newRow.insertCell();
-    const cellCategory = newRow.insertCell();
-    const cellAmount = newRow.insertCell();
-
-    cellDescription.textContent = transaction.description;
-    cellDate.textContent = transaction.date;
-    cellCategory.textContent = transaction.category;
-    cellAmount.textContent = transaction.amount.toFixed(2);
+var elements = document.querySelectorAll('.test-element');
+[].forEach.call(elements, function (element) {
+  element.ontouchstart = element.onmspointerdown = startDrag;
   });
-}
 
-function updateBalance() {
-  totalBalance = 0;
-  totalBalance = transactions.reduce((sum, transaction) => sum + transaction.amount, 0);
-  document.getElementById('balance').value = totalBalance.toFixed(2);
-}
-
-function clearForm() {
-  document.getElementById('description').value = '';
-  document.getElementById('date').value = '';
-  document.getElementById('category').value = '';
-  document.getElementById('amount').value = '';
+  document.ongesturechange = function () {
+                            return false;
 }
 
 

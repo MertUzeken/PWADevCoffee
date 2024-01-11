@@ -21,48 +21,10 @@
   </head>
   <body>
 
-  <h2>Transaction Overview</h2>
-
-  <form onsubmit="submitForm(event)">
-    <label for="description">Beschreibung:</label>
-    <input type="text" id="description" name="description" required><br>
-
-    <label for="date">Datum:</label>
-    <input type="date" id="date" name="date" required><br>
-
-    <label for="category">Kategorie:</label>
-    <input type="text" id="category" name="category" required><br>
-
-    <label for="amount">Wert der Transaktion:</label>
-    <input type="number" id="amount" name="amount" step="0.01" required><br>
-
-
-    <input type="submit" value="Submit">
-  </form>
-
-  <div><p></p></div>
-
-
-  <h3>Transaction History</h3>
-  <table id="transactionTable">
-    <thead>
-      <tr>
-        <th>Beschreibung</th>
-        <th>Datum</th>
-        <th>Kategorie</th>
-        <th>Wert der Transaktion</th>
-      </tr>
-    </thead>
-    <tbody id="transactionList"></tbody>
-  </table>
-  
-  <button type="button" onclick="setTransactiondata()">Save</button>
-  <button type="button" onclick="getTransactiondata()">Load</button>
-
-
-  <label for="balance">Gesamtsumme (Balance):</label>
-  <input type="number" id="balance" name="balance" step="0.01" readonly><br>
-
+  <h2>KanBan Board</h2>
+<div class="test-element">Drag me with one finger</div>
+<div class="test-element">Drag me with another finger</div>
+<div class="test-element">Drag me too</div>>
 
     <script src="js/app.js"></script>
   </body>
@@ -70,11 +32,26 @@
 
 
 <style>
-      li {
-        background-color: #fff;
-        padding: 10px;
-        margin-bottom: 5px;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-      }
+.test-element {
+  height: 100px;
+  background-color: black;
+  width: 100px;
+  z-index: 5;
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  color: white;
+  text-align: center;
+  -ms-touch-action: none;
+}
+
+.test-element:nth-child(2) {
+  top: 150px;
+  left: 150px;
+}
+
+.test-element:nth-child(3) {
+  top: 50px;
+  left: 100px;
+}
 </style>
