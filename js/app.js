@@ -49,35 +49,36 @@ var elements = document.querySelectorAll('.test-element');
 
 
 
-
 document.getElementById("addLaneBtn").addEventListener("click", addLane);
 
-  function addLane() {
-    var kanbanBoard = document.getElementById("kanbanBoard");
-    var lane = document.createElement("div");
-    lane.className = "lane";
-    var laneHeader = document.createElement("div");
-    laneHeader.className = "lane-header";
-    laneHeader.textContent = "New Lane";
-    laneHeader.onclick = function() { editLaneHeader(this); };
-    lane.appendChild(laneHeader);
-    kanbanBoard.appendChild(lane);
-  }
 
-  function editLaneHeader(header) {
-    var input = document.createElement("input");
-    input.type = "text";
-    input.value = header.textContent;
-    input.className = "lane-header-input"; // Add a class for styling
-    input.onblur = function() { updateLaneHeader(header, this); };
-    header.innerHTML = ''; // Clear the header
-    header.appendChild(input); // Add the input field to the header
-    input.focus(); // Automatically focus the input field
-  }
+function addLane() {
+  var kanbanBoard = document.getElementById("kanbanBoard");
+  var lane = document.createElement("div");
+  var laneHeader = document.createElement("div");
+  laneHeader.className = "lane-header";
+  laneHeader.textContent = "New Lane";
+  laneHeader.onclick = function() { editLaneHeader(this); };
+  lane.appendChild(laneHeader);
+  kanbanBoard.appendChild(lane);
+}
 
-  function updateLaneHeader(header, input) {
-    header.textContent = input.value;
-  }
+function editLaneHeader(header) {
+  var input = document.createElement("input");
+  input.type = "text";
+  input.value = header.textContent;
+  input.className = "lane-header-input"; // Add a class for styling
+  input.onblur = function() { updateLaneHeader(header, this); };
+  header.innerHTML = ''; // Clear the header
+  header.appendChild(input); // Add the input field to the header
+  input.focus(); // Automatically focus the input field
+}
+
+
+function updateLaneHeader(header, input) {
+  header.textContent = input.value;
+}
+
 
 
 if ("serviceWorker" in navigator) {

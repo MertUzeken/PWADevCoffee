@@ -21,12 +21,11 @@
   </head>
   <body>
 
-  <h2>KanBan Board</h2>
-  <div id="kanbanBoard">
+<div id="kanbanBoard">
   <!-- Existing lanes will go here -->
-  </div>
-  <p>Add new lane <button type="button" id="addLaneBtn">+</button></p>
-
+</div>
+<p>Add new lane <button type="button" id="addLaneBtn">+</button></p>
+          
 
 
 
@@ -81,20 +80,24 @@
 }
 
 
-
 #kanbanBoard {
   display: flex;
   overflow-x: auto;
   padding: 10px;
+  border-left: 1px solid #ccc;
 }
 
 .lane {
   flex: 0 0 auto;
   width: 200px;
+  height: 500px;
   margin-right: 10px;
   background-color: #f4f4f4;
   padding: 10px;
   border-radius: 5px;
+  border-right: 5px dotted #ccc; /* Add a right border to each lane */
+  height: 80vh; /* Setting the height of each lane */
+  overflow-y: auto; /* Enable vertical scrolling if content exceeds the height */
 }
 
 .lane-header {
@@ -106,14 +109,15 @@
 }
 
 .lane-header-input {
-      width: calc(100% - 10px); /* Subtracting the padding */
-          padding: 5px;
-              border: none;
-                  border-radius: 3px;
-                      box-sizing: border-box;
-                          text-align: center;
-                          }
+  width: calc(100% - 10px); /* Subtracting the padding */
+  padding: 5px;
+  border: none;
+  border-radius: 3px;
+  box-sizing: border-box;
+  text-align: center;
 }
+                                                                                                      
+
 
 </style>
 
