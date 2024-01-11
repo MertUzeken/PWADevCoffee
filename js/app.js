@@ -34,14 +34,14 @@ var elements = document.querySelectorAll('.test-element');
  document.getElementById("addBoxBtn").addEventListener("click", addBox);
 
 function startDrag(e) {
+  var containerRect = boxContainer.getBoundingClientRect();
   var pos = [this.offsetLeft, this.offsetTop];
   var origin = getCoors(e);
 
   this.ontouchmove = this.onmspointermove = moveDrag;
-
   this.ontouchend = this.onmspointerup = function () {
-  this.ontouchmove = this.onmspointermove = null;
-  this.ontouchend = this.onmspointerup = null;
+    this.ontouchmove = this.onmspointermove = null;
+    this.ontouchend = this.onmspointerup = null;
   }
 
   var that = this;
@@ -51,12 +51,12 @@ function startDrag(e) {
     var deltaX = currentPos[0] - origin[0];
     var deltaY = currentPos[1] - origin[1];
 
-    // Adjust for horizontal scrolling
-    var scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
-    var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    // Adjust the position based on the container's offset
+    var containerRect = boxContainer.getBoundingClientRect();
 
-    that.style.left = (pos[0] + deltaX) + 'px';
-    that.style.top = (pos[1] + deltaY) + 'px';
+    that.style.left = (pos[0] + deltaX - containerRect.left + boxContainer.scrollLeft) + 'px';
+    that.style.top = (pos[1] + deltaY - containerRect.top + boxContainer.scrollTop) + 'px';
+
     return false; // cancels scrolling
   }
 }
