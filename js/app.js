@@ -73,6 +73,7 @@ document.getElementById("addLaneBtn").addEventListener("click", addLane);
 function addLane() {
   var kanbanBoard = document.getElementById("kanbanBoard");
   var lane = document.createElement("div");
+  lane.className = "lane"; // Assign the 'lane' class
   var laneHeader = document.createElement("div");
   laneHeader.className = "lane-header";
   laneHeader.textContent = "New Lane";
