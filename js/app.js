@@ -48,6 +48,37 @@ var elements = document.querySelectorAll('.test-element');
 }
 
 
+
+
+document.getElementById("addLaneBtn").addEventListener("click", addLane);
+
+  function addLane() {
+    var kanbanBoard = document.getElementById("kanbanBoard");
+    var lane = document.createElement("div");
+    lane.className = "lane";
+    var laneHeader = document.createElement("div");
+    laneHeader.className = "lane-header";
+    laneHeader.textContent = "New Lane";
+    laneHeader.onclick = function() { editLaneHeader(this); };
+    lane.appendChild(laneHeader);
+    kanbanBoard.appendChild(lane);
+  }
+
+  function editLaneHeader(header) {
+    var input = document.createElement("input");
+    input.type = "text";
+    input.value = header.textContent;
+    input.onblur = function() { updateLaneHeader(header, this); };
+    header.textContent = '';
+    header.appendChild(input);
+    input.focus();
+  }
+
+  function updateLaneHeader(header, input) {
+    header.textContent = input.value;
+  }
+
+
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", function() {
     navigator.serviceWorker
