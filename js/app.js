@@ -68,10 +68,11 @@ document.getElementById("addLaneBtn").addEventListener("click", addLane);
     var input = document.createElement("input");
     input.type = "text";
     input.value = header.textContent;
+    input.className = "lane-header-input"; // Add a class for styling
     input.onblur = function() { updateLaneHeader(header, this); };
-    header.textContent = '';
-    header.appendChild(input);
-    input.focus();
+    header.innerHTML = ''; // Clear the header
+    header.appendChild(input); // Add the input field to the header
+    input.focus(); // Automatically focus the input field
   }
 
   function updateLaneHeader(header, input) {
