@@ -1,20 +1,11 @@
 const container = document.querySelector(".container");
 
-  function getCoors(e) {
-    var coors = [];
-    if (e.targetTouches && e.targetTouches.length) {
-    var thisTouch = e.targetTouches[0];
-    coors[0] = thisTouch.clientX;
-    coors[1] = thisTouch.clientY;
-    } else {
-        coors[0] = e.clientX;
-        coors[1] = e.clientY;
-    }
-    return coors;
-  }
 
+//Save "Notes" object e.g. boxes objects inside elements
 var elements = document.querySelectorAll('.test-element');
 
+
+//Add new notes ba appending new box object into boxContainer where all created notes land intially
   function addBox() {
     var boxContainer = document.getElementById("boxContainer");
     var newBox = document.createElement("div");
@@ -24,15 +15,21 @@ var elements = document.querySelectorAll('.test-element');
     makeDraggable(newBox); // Make the new box draggable
   }
 
+
+//Allows for moving notes
   function makeDraggable(element) {
     element.ontouchstart = element.onmspointerdown = startDrag;
   }
+
+
  var elements = document.querySelectorAll('.test-element');
  elements.forEach(makeDraggable);
 
- // Add new box on button click
+ // Add new box on button click event. Is being called on pressing the add box button. (Box = Note)
  document.getElementById("addBoxBtn").addEventListener("click", addBox);
 
+
+// All the code below is being provided by WhatWebCanDo
 function startDrag(e) {
   this.ontouchmove = this.onmspointermove = moveDrag;
 
@@ -53,6 +50,11 @@ function startDrag(e) {
     this.style.top = (pos[1] + deltaY) + 'px';
     return false; // cancels scrolling
   }
+
+
+  // Return coordinate values for maintaining pos inside document. However breaks when adding more then 3 lanes because horizontal scrolling comes into play.
+  // Solution: disable scrolling or create fixed sized document site.
+  // Problem: Not enough time for the exercise ...
 
   function getCoors(e) {
     var coors = [];
@@ -77,12 +79,12 @@ function startDrag(e) {
   document.ongesturechange = function () {
     return false;
   }
-
+//______________________________________________________________
 
 
 document.getElementById("addLaneBtn").addEventListener("click", addLane);
 
-
+//Add new lanes by pushing new lanes inside kanbanBoard object
 function addLane() {
   var kanbanBoard = document.getElementById("kanbanBoard");
   var lane = document.createElement("div");
@@ -95,6 +97,7 @@ function addLane() {
   kanbanBoard.appendChild(lane);
 }
 
+//Allow for editing the lane header 
 function editLaneHeader(header) {
   var input = document.createElement("input");
   input.type = "text";
@@ -106,7 +109,7 @@ function editLaneHeader(header) {
   input.focus(); // Automatically focus the input field
 }
 
-
+//Called by function editLaneHeader above for updating the new Text inside the div element of the respective lane.
 function updateLaneHeader(header, input) {
   header.textContent = input.value;
 }

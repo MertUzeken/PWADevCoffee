@@ -21,6 +21,8 @@
   </head>
   <body>
 
+
+<!--Kanban board element, all lanes are being pushed inside between containers-->
 <div id="kanbanBoard">
  <!-- <div class="lane">
   <div class="lane-header">Lane 1</div>
@@ -35,13 +37,14 @@
 
 
 <br>
+<!--Button for adding new lanes, calles event addLaneBtn-->
 <p>Add new lane <button type="button" id="addLaneBtn">+</button></p>
 <button id="addBoxBtn">Add Box</button>
 <div id="boxContainer">
 <!-- Draggable boxes will be added here -->
 </div>
 
-
+<!-- Dummy Tasks-->
 
 <div class="test-element">Task 1</div>
 <div class="test-element">Task 2</div>
@@ -54,11 +57,13 @@
 
 <style>
 
+/* Box container where boxes are added (land) initially when created*/
 #boxContainer {
   position: relative;
 
 }
 
+/* All test elements provided by what web can do*/
 .test-element {
   height: 100px;
   background-color: rgb(218, 155, 39);
@@ -82,14 +87,16 @@
   top: 50px;
   left: 100px;
 }
+/*__________________________________________________*/
 
 
+/*Kanban board column styling*/
 .kanban-column {
   border: 1px solid #ccc;
   padding: 10px;
   margin: 10px;
 }
-
+/*Edit name on headers styling*/
 .edit-name {
   display: none;
   width: 100%;
@@ -100,7 +107,7 @@
   cursor: pointer;
 }
 
-
+/*Whole board styling*/
 #kanbanBoard {
   display: flex;
   overflow-x: auto;
@@ -108,6 +115,7 @@
   border-left: 1px solid #3060c9;
 }
 
+/*Lane styling for all lanes*/
 .lane {
   flex: 0 0 auto;
   width: 200px;
@@ -117,11 +125,13 @@
   background-color: #f4f4f4;
   padding: 10px;
   border-radius: 5px;
-  border-right: 5px dashed #444444; /* Add a right border to each lane */
-  height: 80vh; /* Setting the height of each lane */
-  overflow-y: auto; /* Enable vertical scrolling if content exceeds the height */
+  border-right: 2px dashed #444444; /* Add a right border to each lane dashed border lanes*/
+  height: 80vh;
+  overflow-y: auto; 
 }
 
+
+/*Lane styling for all lane headers*/
 .lane-header {
   cursor: pointer;
   background-color: #ddd;
@@ -132,7 +142,7 @@
 }
 
 .lane-header-input {
-  width: calc(100% - 10px); /* Subtracting the padding */
+  width: calc(100% - 10px); 
   padding: 5px;
   border: none;
   border-radius: 3px;
