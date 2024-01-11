@@ -25,7 +25,11 @@
   <!-- Existing lanes will go here -->
 </div>
 <p>Add new lane <button type="button" id="addLaneBtn">+</button></p>
-          
+<button id="addBoxBtn">Add Box</button>
+<div id="boxContainer">
+<!-- Draggable boxes will be added here -->
+</div>
+
 
 
 
@@ -39,6 +43,12 @@
 
 
 <style>
+
+#boxContainer {
+position: relative;
+
+}
+
 .test-element {
   height: 100px;
   background-color: black;
@@ -50,6 +60,7 @@
   color: white;
   text-align: center;
   -ms-touch-action: none;
+  position: absolute;
 }
 
 .test-element:nth-child(2) {
