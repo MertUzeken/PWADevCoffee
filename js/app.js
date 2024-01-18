@@ -118,7 +118,7 @@ function updateLaneHeader(header, input) {
 
 
 if ("serviceWorker" in navigator) {
-  let version = 2;
+  let version = 3;
   window.addEventListener("load", function() {
     navigator.serviceWorker
      .register("./serviceWorker.js",{ scope: "./" })
