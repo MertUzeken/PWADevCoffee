@@ -32,7 +32,7 @@ self.addEventListener("activate", function(e) {
 self.addEventListener("fetch", fetchEvent => {
   fetchEvent.respondWith(
     caches.match(fetchEvent.request).then(res => {
-      console.log("Fetching service worker")
+      //console.log("Fetching service worker")
       return res || fetch(fetchEvent.request);
     })
   );
