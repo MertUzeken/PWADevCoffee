@@ -118,11 +118,12 @@ function updateLaneHeader(header, input) {
 
 
 if ("serviceWorker" in navigator) {
+  let version = 1;
   window.addEventListener("load", function() {
     navigator.serviceWorker
      .register("./serviceWorker.js",{ scope: "./" })
-      .then(res => console.log("Service worker registered !"))
-      .catch(err => console.log("Service worker not registered !", err));
+      .then(res => console.log("Service worker registered !" + version))
+      .catch(err => console.log("Service worker not registered !" + version, err));
   });
 }
 

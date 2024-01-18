@@ -14,18 +14,20 @@ const assets = [
   "/images/coffee8.jpg",
   "/images/coffee9.jpg"
 ];
-
+let version = 1;
 self.addEventListener("install", installEvent => {
   installEvent.waitUntil(
     caches.open(staticDevCoffee).then(cache => {
       cache.addAll(assets);
       console.log("Service worker installed !");
+      console.log(version);
     })
   );
 });
 
 self.addEventListener("activate", function(e) {
     console.log("Service worker activated !");
+    console.log(version);
   }
 );
 
