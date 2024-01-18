@@ -19,13 +19,20 @@ self.addEventListener("install", installEvent => {
   installEvent.waitUntil(
     caches.open(staticDevCoffee).then(cache => {
       cache.addAll(assets);
+      console.log("Service worker installed");
     })
   );
 });
 
+addEventListener("activate", function(e) {
+    console.log('[ServiceWorker] activated !');
+  }
+);
+
 self.addEventListener("fetch", fetchEvent => {
   fetchEvent.respondWith(
     caches.match(fetchEvent.request).then(res => {
+      console.log("Fetching service worker")
       return res || fetch(fetchEvent.request);
     })
   );
